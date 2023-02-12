@@ -1,6 +1,7 @@
 module.exports = {
     eventChannel: {
-        name: "test-eventu",
-        id: 1074013707836858500
+        name: "┇📋┇event-towary",
+        id: 1069912883837808710,
+        messageId: "1074316206825279569"
     }
 }
