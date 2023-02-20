@@ -10,6 +10,8 @@
   "author": "kyeZ",
   "license": "ISC",
   "dependencies": {
+    "colors": "^1.4.0",
+    "dayjs": "^1.11.7",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "node-fetch": "2.6.6",
