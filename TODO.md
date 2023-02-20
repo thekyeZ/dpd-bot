@@ -7,3 +7,4 @@
 - [x] Dodać włączanie featurów bota w pliku config
 - [x] Logowanie do pliku .log
 - [ ] Zrobić pożądek w `utils`
+- [ ] Dodać bota liczącego faktury paliwowe
