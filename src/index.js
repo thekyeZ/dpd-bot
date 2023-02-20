@@ -1,32 +1,35 @@
-require('dotenv').config();
-const {Client, IntentsBitField, GatewayIntentBits, Events} = require('discord.js');
-
-const { startLoop } = require('./utils/event-data');
+require("dotenv").config();
+const { Client, GatewayIntentBits, Events } = require("discord.js");
+const { setTimeInDPD } = require("./utils/time-data");
+const botConfig = require("../config");
+const { startLoop } = require("./utils/event-data");
+const { showBanner } = require("./utils/banner");
 
 const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers,
-    ],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+  ],
 });
 
-let eventDataIntervalID;
-
-/**
-    TODO:
-
-    [] Dodać komendę start loop
-    [] Dodać komendę stop loop - clearInterval
-    []
-*/
-
-
+let itervalIDs = {
+  eventChannel: null,
+  dpdTimeChannel: null,
+};
 
 client.on(Events.ClientReady, async () => {
-    console.log(`Loggen in as ${client.user.tag}`);
-    eventDataIntervalID = startLoop(client);
-})
+  showBanner();
+  console.log(`Logged in as ${client.user.tag}`);
+
+  if (botConfig.eventChannel.active) {
+    itervalIDs.eventChannel = startLoop(client);
+  }
+
+  if (botConfig.dpdTimeChannel.active) {
+    itervalIDs.dpdTimeChannel = setTimeInDPD(client);
+  }
+});
 
 client.login(process.env.TOKEN);
