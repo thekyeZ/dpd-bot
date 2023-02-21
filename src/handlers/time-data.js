@@ -1,7 +1,7 @@
 // const botConfig = require("../../config");
 const { workers } = require("../data/workers-top");
-const { getNewEmbed } = require("./embed");
-const logger = require("./logger");
+const { getNewEmbed } = require("../utils/embed");
+const logger = require("../utils/logger");
 
 function getMinDiff(startDate, endDate) {
   const msInMinute = 60 * 1000;

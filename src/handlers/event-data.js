@@ -1,5 +1,5 @@
 const fetch = require("node-fetch");
-const logger = require("./logger");
+const logger = require("../utils/logger");
 
 async function getEventData() {
   // console.log("--- Pobieranie statystyk eventu ---");
