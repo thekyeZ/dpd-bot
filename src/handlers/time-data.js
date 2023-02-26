@@ -46,8 +46,8 @@ async function setTimeInDPD(client, config) {
       });
     await msgToEdit.edit({ embeds: [await getNewEmbed(newRows)] });
     logger("----- New Embed Sent -----");
-    // }, 1800000); // 30 mins
-  }, 3600); // 1 second
+  }, 1800000); // 30 mins
+  // }, 3600); // 1 second
 }
 
 module.exports = {

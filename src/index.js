@@ -1,8 +1,13 @@
 require("dotenv").config();
 const { Client, GatewayIntentBits, Events } = require("discord.js");
 const botConfig = require("../config");
-const { sumUpFromText, resetInvoices } = require("./handlers/fuel");
+const {
+  sumUpFromText,
+  resetInvoices,
+  getInvoicesChannels,
+} = require("./handlers/fuel");
 const { showBanner } = require("./utils/banner");
+const logger = require("./utils/logger");
 
 const client = new Client({
   intents: [
@@ -17,9 +22,19 @@ let itervalIDs = {
   eventChannel: null,
   dpdTimeChannel: null,
 };
+let guild;
+
+const fuelAllowedUsers = ["kyeZ", "BureQ", "Manaolana"];
 
 client.on(Events.ClientReady, async () => {
   // console.log(`Logged in as ${client.user.tag}`);
+  guild = await client.guilds.fetch(process.env.SERVER_ID);
+  const members = await guild.members.fetch();
+
+  members.forEach((user) => {
+    console.log(user.user.avatarURL());
+  });
+
   const configKeys = Object.keys(botConfig);
   showBanner(
     configKeys
@@ -29,7 +44,7 @@ client.on(Events.ClientReady, async () => {
   );
   configKeys.forEach((key) => {
     const botFeature = botConfig[key];
-    if (botFeature.active) {
+    if (botFeature.active && botFeature.type === 0) {
       itervalIDs[key] = botFeature.callback(client, botConfig);
     }
   });
@@ -37,24 +52,51 @@ client.on(Events.ClientReady, async () => {
 
 client.on(Events.InteractionCreate, async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
+  // const configKeys = Object.keys(botConfig);
+  // const interactionTriggered = configKeys.filter((key) => {
+  //   return botConfig[key].type === 1;
+  // });
 
-  const configKeys = Object.keys(botConfig);
-  const interactionTriggered = configKeys.filter((key) => {
-    return botConfig[key].type === 1;
+  const invoicesChannels = await getInvoicesChannels(guild);
+  const invoiceChannel = invoicesChannels.find((iChannels) => {
+    return iChannels.name == interaction.channel.name;
   });
+  console.log(interaction.user.username);
 
   switch (interaction.commandName) {
     case "rozlicz":
       // sumUpFuel(interaction);
-      // sumUpFromText(interaction);
-      interactionTriggered["fuel"].callback(interaction);
+      if (!invoiceChannel) {
+        logger(`--- Wywołano /rolicz na niewpsieranym kanale ---`);
+        break;
+      }
+
+      if (!fuelAllowedUsers.includes(interaction.user.username)) {
+        logger(
+          `--- Brak uprawnień do użycia komenty /rolicz przez ${interaction.user.username} ---`
+        );
+        break;
+      }
+
+      const sum = await sumUpFromText(interaction);
+      logger(
+        `--- Rozliczono faktury na kanale ${invoiceChannel.name}: ${
+          sum ? sum : ""
+        } ---`
+      );
+
       break;
     case "resetuj-faktury":
       // resetInvoices(interaction);
-      interactionTriggered["fuel"].callback(interaction);
+      if (!invoiceChannel) {
+        logger(`--- Wywołano /resetuj-faktury na niewpsieranym kanale ---`);
+        break;
+      }
+      resetInvoices(interaction);
+      logger(`--- Zresetowano faktury na kanale ${invoiceChannel.name} ---`);
+
       break;
     default:
-      // console.log("Nierozpoznano komendy");
       logger("--- Nierozpoznano komendy ---");
   }
 });

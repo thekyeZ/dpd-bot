@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "registerCommands": "node src/commands/register-commands.js"
   },
   "keywords": [],
   "author": "kyeZ",
@@ -15,6 +17,7 @@
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
     "node-fetch": "2.6.6",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "tesseract.js": "^4.0.2"
   }
 }

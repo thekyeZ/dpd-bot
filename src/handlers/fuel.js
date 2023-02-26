@@ -41,6 +41,7 @@ module.exports = {
     const fuelSum = fuelValues.reduce((p, c) => p + c, 0);
     if (invoiceValid) {
       interaction.editReply("Rozliczenie: $" + fuelSum);
+      return fuelSum;
     } else {
       interaction.editReply("Popraw błędy we wskazanych fakturach:");
     }
@@ -95,5 +96,24 @@ module.exports = {
         "Nie udało się zrobić roliczenia lub kanał jest pusty"
       );
     }
+  },
+  getInvoicesChannels: async (guild) => {
+    var array = [];
+    // let channels = guild.channels;
+
+    // console.log(guild.channels.cache);
+
+    return guild.channels.cache
+      .filter((ch) => ch.name.includes("karta-"))
+      .map((ch) => {
+        // const a = await ch.messages.fetch();
+        // const msgs = a.map((msg) => msg.content);
+
+        return {
+          name: ch.name,
+          id: ch.id,
+          // messages: msgs,
+        };
+      });
   },
 };

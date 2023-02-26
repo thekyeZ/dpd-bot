@@ -17,10 +17,13 @@ const commands = [
   const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
 
   try {
-    console.log("Registering commands");
+    console.log("Registering commands", process.env.SERVER_ID);
 
     await rest.put(
-      Routes.applicationGuildCommands(botConfig.clientID, botConfig.serverID),
+      Routes.applicationGuildCommands(
+        process.env.CLIENT_ID,
+        process.env.SERVER_ID
+      ),
       { body: commands }
     );
 
