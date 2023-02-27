@@ -2,7 +2,11 @@ module.exports = {
   workers: [
     {
       nick: "misiakov87",
-      date: "19.05.2022",
+      employmentDate: "19.05.2022",
+      role: 2,
+      isOnVacation: false,
+      fireDate: "",
+      name: "",
     },
     {
       nick: "piotr c / maskomistrz",

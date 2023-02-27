@@ -27,11 +27,11 @@ async function setTimeInDPD(client, config) {
     const allWorkers = workers;
 
     let rows = allWorkers.map((worker) => {
-      const prepDate = worker.date.split(".").reverse().join("-");
+      const prepDate = worker.employmentDate.split(".").reverse().join("-");
       const startDate = new Date(prepDate);
       let minDiff = getMinDiff(startDate.getTime(), new Date().getTime());
       return [
-        `**${worker.nick}** jest z nami od **${worker.date}** czyli już ponad __**${minDiff} minut!**__`,
+        `**${worker.nick}** jest z nami od **${worker.employmentDate}** czyli już ponad __**${minDiff} minut!**__`,
         minDiff,
       ];
     });
