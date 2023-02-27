@@ -29,11 +29,6 @@ const fuelAllowedUsers = ["kyeZ", "BureQ", "Manaolana"];
 client.on(Events.ClientReady, async () => {
   // console.log(`Logged in as ${client.user.tag}`);
   guild = await client.guilds.fetch(process.env.SERVER_ID);
-  const members = await guild.members.fetch();
-
-  members.forEach((user) => {
-    console.log(user.user.avatarURL());
-  });
 
   const configKeys = Object.keys(botConfig);
   showBanner(
@@ -61,7 +56,6 @@ client.on(Events.InteractionCreate, async (interaction) => {
   const invoiceChannel = invoicesChannels.find((iChannels) => {
     return iChannels.name == interaction.channel.name;
   });
-  console.log(interaction.user.username);
 
   switch (interaction.commandName) {
     case "rozlicz":

@@ -18,9 +18,9 @@ module.exports = {
   dpdTimeChannel: {
     name: "🕰️ Czas pracy",
     channelName: "czas-w-dpd",
-    id: 1076837717062733895,
+    id: 1079830416141328494,
     // messageId: "1076855970782785646",
-    messageId: "1077294610554040330",
+    messageId: "1079879907754131596",
     active: true,
     type: 0,
     callback: setTimeInDPD,

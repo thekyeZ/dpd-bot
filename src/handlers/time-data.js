@@ -17,6 +17,9 @@ async function setTimeInDPD(client, config) {
     if (channel.name !== config.dpdTimeChannel.channelName) {
       return;
     }
+    // channel.send("init");
+
+    // return;
 
     const msgToEdit = await channel.messages.fetch(
       config.dpdTimeChannel.messageId
@@ -46,8 +49,9 @@ async function setTimeInDPD(client, config) {
       });
     await msgToEdit.edit({ embeds: [await getNewEmbed(newRows)] });
     logger("----- New Embed Sent -----");
-  }, 1800000); // 30 mins
-  // }, 3600); // 1 second
+    // }, 1800000); // 30 mins
+    // }, 3600); // 1 second
+  }, 60000); // 1 minute
 }
 
 module.exports = {
