@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node src/master-bot.js",
     "dev": "nodemon src/index.js",
     "registerCommands": "node src/commands/register-commands.js"
   },
@@ -16,6 +16,7 @@
     "dayjs": "^1.11.7",
     "discord.js": "^14.7.1",
     "dotenv": "^16.0.3",
+    "node-cron": "^3.0.2",
     "node-fetch": "2.6.6",
     "nodemon": "^2.0.20",
     "tesseract.js": "^4.0.2"

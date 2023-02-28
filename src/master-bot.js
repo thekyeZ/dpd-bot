@@ -6,6 +6,7 @@ const {
   resetInvoices,
   getInvoicesChannels,
 } = require("./handlers/fuel");
+const { setupCron } = require("./handlers/time-data");
 const { showBanner } = require("./utils/banner");
 const logger = require("./utils/logger");
 
@@ -30,6 +31,8 @@ client.on(Events.ClientReady, async () => {
   // console.log(`Logged in as ${client.user.tag}`);
   guild = await client.guilds.fetch(process.env.SERVER_ID);
 
+  setupCron(client, botConfig);
+
   const configKeys = Object.keys(botConfig);
   showBanner(
     configKeys
@@ -39,7 +42,7 @@ client.on(Events.ClientReady, async () => {
   );
   configKeys.forEach((key) => {
     const botFeature = botConfig[key];
-    if (botFeature.active && botFeature.type === 0) {
+    if (botFeature.active && botFeature.type === 0 && !botFeature.cronPattern) {
       itervalIDs[key] = botFeature.callback(client, botConfig);
     }
   });

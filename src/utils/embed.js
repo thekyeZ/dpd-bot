@@ -24,7 +24,7 @@ async function getNewEmbed(fields) {
     ])
     .setTimestamp()
     .setFooter({
-      text: "Stan z dnia (aktualizacja co 30 minut)",
+      text: "Stan z dnia (aktualizacja codziennie)",
       iconURL:
         "https://cdn.discordapp.com/attachments/1069223574021361714/1074315102045622362/dpdlogopostawa3.png",
     });

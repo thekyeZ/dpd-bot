@@ -23,6 +23,7 @@ module.exports = {
     messageId: "1079879907754131596",
     active: true,
     type: 0,
+    cronPattern: "",
     callback: setTimeInDPD,
   },
   playground: {

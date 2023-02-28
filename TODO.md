@@ -7,7 +7,8 @@
 - [x] Przerobić na embed? - v2
 - [x] Dodać włączanie featurów bota w pliku config
 - [x] Logowanie do pliku .log
-- [ ] Zrobić pożądek w `utils`
+- [x] Zrobić pożądek w `utils`
 - [x] Dodać bota liczącego faktury paliwowe
 - [ ] Przetestować rejestrowanie komend
 - [ ] Przetestować bota liczącego paliwo
+- [ ] !!!Przepiąć dane workerów na dane z bazy danych
