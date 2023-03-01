@@ -5,7 +5,7 @@ var path = require("path");
     Log path pattern: log-2023-01-01.log
  */
 
-module.exports = (content = "Pusty wpis") => {
+module.exports = (content = "Empty entry") => {
   const today = new Date();
   const currentLogFileName = `log-${today.toISOString().split("T")[0]}.log`;
   const currentLogFilePath = path.join(
